@@ -504,22 +504,37 @@ button { /* Button reset styling */
     object-fit: cover;
 }
 
-.package-content {
-    padding: var(--spacing-md);
+.package-content { /* Package card text content area */
+    padding: var(--spacing-md); /* Inner padding */
 }
 
-.package-name {
-    font-family: var(--font-secondary);
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--primary-green);
-    margin-bottom: var(--spacing-sm);
+.package-name { /* Package title heading */
+    font-family: var(--font-secondary); /* Use Montserrat font */
+    font-size: 1.5rem; /* Title font size */
+    font-weight: 600; /* Semi-bold weight */
+    color: var(--primary-green); /* Green color */
+    margin-bottom: var(--spacing-xs); /* Small margin below */
 }
 
-.package-description {
-    color: var(--gray);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.6;
+.package-duration { /* Package duration text (e.g., "8 Days / 7 Nights") */
+    font-size: 0.95rem; /* Slightly smaller font */
+    color: var(--deep-blue); /* Blue color */
+    font-weight: 600; /* Semi-bold */
+    margin-bottom: var(--spacing-xs); /* Small margin below */
+}
+
+.package-route { /* Package route text (e.g., "Chandigarh → Shimla...") */
+    font-size: 0.85rem; /* Small font size */
+    color: var(--gray); /* Gray color */
+    font-style: italic; /* Italic style */
+    margin-bottom: var(--spacing-sm); /* Medium margin below */
+    line-height: 1.4; /* Comfortable line height */
+}
+
+.package-description { /* Package description paragraph */
+    color: var(--gray); /* Gray text color */
+    margin-bottom: var(--spacing-md); /* Medium margin below */
+    line-height: 1.6; /* Comfortable line height for readability */
 }
 
 .view-details-btn {

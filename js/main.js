@@ -308,34 +308,18 @@ document.addEventListener('DOMContentLoaded', handleVideoVisibility); // Check v
 // Package data - Easy to update
 const packages = [ // Array of package objects - add or modify packages here
     {
-        name: 'Shimla Delight', // Package name
-        image: 'assets/images/package1.jpg', // Image path for this package
-        description: 'Experience the colonial charm of Shimla with stunning mountain views, pleasant weather, and memorable adventures.' // Package description
+        name: 'Spiti Valley Expedition', // Package name
+        duration: '8 Days / 7 Nights', // Package duration
+        route: 'Chandigarh → Shimla → Sangla → Chitkul → Tabo → Kaza → Kalpa → Shimla → Chandigarh', // Route
+        image: 'assets/package/spiti-package.jpg', // Image path for this package
+        description: 'Embark on an unforgettable journey through Spiti Valley. Experience the Ajanta of Himalayas (Tabo Monastery), visit the last village on Indo-Tibetan route (Chitkul), and explore high-altitude monasteries in Kaza.' // Package description
     },
     {
-        name: 'Manali Magic', // Package name
-        image: 'assets/images/package2.jpg', // Image path for this package
-        description: 'Discover the beauty of Manali with snow-capped peaks, adventure sports, and serene valleys perfect for all travelers.' // Package description
-    },
-    {
-        name: 'Kasol Paradise', // Package name
-        image: 'assets/images/package3.jpg', // Image path for this package
-        description: 'Immerse yourself in the hippie culture of Kasol, surrounded by lush forests, the Parvati River, and peaceful vibes.' // Package description
-    },
-    {
-        name: 'Spiti Expedition', // Package name
-        image: 'assets/images/package4.jpg', // Image path for this package
-        description: 'Embark on a thrilling journey to Spiti Valley, exploring high-altitude deserts, ancient monasteries, and rugged landscapes.' // Package description
-    },
-    {
-        name: 'Dharamshala Retreat', // Package name
-        image: 'assets/images/package5.jpg', // Image path for this package
-        description: 'Find peace in Dharamshala, home to Tibetan culture, scenic tea gardens, and breathtaking Dhauladhar mountain ranges.' // Package description
-    },
-    {
-        name: 'Kullu Adventure', // Package name
-        image: 'assets/images/package6.jpg', // Image path for this package
-        description: 'Explore the vibrant Kullu Valley with river rafting, trekking, and the famous Kullu Dussehra festival experience.' // Package description
+        name: 'Manali-Shimla-Delhi Tour', // Package name
+        duration: '6 Days / 5 Nights', // Package duration
+        route: 'Phillaur → Manali → Shimla → Delhi', // Route
+        image: 'assets/package/manali-shimla-package.jpg', // Image path for this package
+        description: 'Discover the perfect blend of adventure and culture. Experience Rohtang Pass, Atal Tunnel, Solang Valley adventures in Manali, colonial charm of Shimla, and iconic monuments of Delhi in one incredible journey.' // Package description
     }
 ];
 
@@ -344,22 +328,30 @@ function renderPackages() { // Function to generate and display package cards
     const packagesGrid = document.getElementById('packagesGrid'); // Get packages container element
     
     if (packagesGrid) { // If packages container exists
-        packagesGrid.innerHTML = packages.map(pkg => ` 
+        packagesGrid.innerHTML = packages.map((pkg, index) => ` 
             <div class="package-card">
                 <img src="${pkg.image}" alt="${pkg.name}" class="package-image" onerror="this.src='assets/images/placeholder.jpg'">
                 <div class="package-content">
                     <h3 class="package-name">${pkg.name}</h3>
+                    <p class="package-duration">${pkg.duration}</p>
+                    <p class="package-route">${pkg.route}</p>
                     <p class="package-description">${pkg.description}</p>
-                    <button class="view-details-btn">View Details</button>
+                    <button class="view-details-btn" data-package-index="${index}">View Details</button>
                 </div>
             </div>
         `).join(''); // Map each package to HTML and join into single string
         
         // Add click handlers for View Details buttons
         const detailButtons = packagesGrid.querySelectorAll('.view-details-btn'); // Get all detail buttons
-        detailButtons.forEach((button, index) => { // Loop through each button
-            button.addEventListener('click', () => { // Add click event to each button
-                alert(`Package details for ${packages[index].name} will be shown here. You can implement a modal or redirect to a details page.`); // Show alert with package name
+        detailButtons.forEach((button) => { // Loop through each button
+            button.addEventListener('click', function() { // Add click event to each button
+                const packageIndex = this.getAttribute('data-package-index'); // Get package index from button
+                // Open package detail page based on index
+                if (packageIndex === '0') { // First package (Spiti Valley)
+                    window.open('package1-spiti.html', '_blank'); // Open Spiti detail page in new tab
+                } else if (packageIndex === '1') { // Second package (Manali-Shimla)
+                    window.open('package2-manali-shimla.html', '_blank'); // Open Manali-Shimla detail page in new tab
+                }
             });
         });
     }
