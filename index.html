@@ -68,14 +68,14 @@
         <!-- Hero Content -->
         <div class="hero-content">
             <h1 class="hero-title">Himachal Mountain Tours</h1>
-            <p class="hero-subtitle">Small group trips to Spiti, Manali, and Shimla. Based in Himachal since 2020.</p>
+            <p class="hero-subtitle">Small group trips to Spiti, Manali, and Shimla. Based in Himachal since 2026.</p>
             <a href="#packages" class="cta-button">View Tours</a>
         </div>
         
         <!-- Slider Navigation -->
         <div class="slider-nav">
-            <button class="slider-btn prev-btn" id="prevBtn">&larr;</button>
-            <button class="slider-btn next-btn" id="nextBtn">&rarr;</button>
+            <button class="slider-btn prev-btn" id="prevBtn">&lt;</button>
+            <button class="slider-btn next-btn" id="nextBtn">&gt;</button>
         </div>
         
         <!-- Slider Indicators -->
@@ -96,31 +96,22 @@
             
             <div class="gallery-grid">
                 <!-- Gallery Image 1 -->
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery-img="0">
                     <img src="assets/images/gallery1.jpg" alt="Gallery Image 1" class="gallery-image">
-                    <div class="gallery-overlay">
-                        <span class="gallery-icon">📷</span>
-                    </div>
                 </div>
                 
                 <!-- Gallery Image 2 -->
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery-img="1">
                     <img src="assets/images/gallery2.jpg" alt="Gallery Image 2" class="gallery-image">
-                    <div class="gallery-overlay">
-                        <span class="gallery-icon">📷</span>
-                    </div>
                 </div>
                 
                 <!-- Gallery Image 3 -->
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery-img="2">
                     <img src="assets/images/gallery3.jpg" alt="Gallery Image 3" class="gallery-image">
-                    <div class="gallery-overlay">
-                        <span class="gallery-icon">📷</span>
-                    </div>
                 </div>
                 
                 <!-- Gallery Video 1 -->
-                <div class="gallery-item video-item">
+                <div class="gallery-item video-item" data-video-src="assets/videos/gallery1.mp4">
                     <video class="gallery-video" data-video-id="1">
                         <source src="assets/videos/gallery1.mp4" type="video/mp4">
                         Your browser does not support the video tag.
@@ -131,15 +122,12 @@
                 </div>
                 
                 <!-- Gallery Image 4 -->
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery-img="3">
                     <img src="assets/images/gallery4.jpg" alt="Gallery Image 4" class="gallery-image">
-                    <div class="gallery-overlay">
-                        <span class="gallery-icon">📷</span>
-                    </div>
                 </div>
                 
                 <!-- Gallery Video 2 -->
-                <div class="gallery-item video-item">
+                <div class="gallery-item video-item" data-video-src="assets/videos/gallery2.mp4">
                     <video class="gallery-video" data-video-id="2">
                         <source src="assets/videos/gallery2.mp4" type="video/mp4">
                         Your browser does not support the video tag.
@@ -151,6 +139,27 @@
             </div>
         </div>
     </section>
+    
+    <!-- Gallery Modal -->
+    <div class="gallery-modal" id="galleryModal">
+        <span class="gallery-modal-close" id="galleryModalClose">&times;</span>
+        <div class="gallery-modal-content">
+            <span class="gallery-modal-prev" id="galleryModalPrev">&lt;</span>
+            <img src="" alt="Gallery Image" class="gallery-modal-image" id="galleryModalImage">
+            <span class="gallery-modal-next" id="galleryModalNext">&gt;</span>
+        </div>
+    </div>
+    
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <span class="video-modal-close" id="videoModalClose">&times;</span>
+            <video class="video-modal-player" id="videoModalPlayer" controls>
+                <source src="" type="video/mp4" id="videoModalSource">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
 
     <!-- PACKAGES SECTION -->
     <section class="packages" id="packages">

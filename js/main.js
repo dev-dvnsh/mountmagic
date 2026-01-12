@@ -519,6 +519,153 @@ window.removeEventListener('scroll', handleVideoVisibility); // Remove old liste
 window.addEventListener('scroll', optimizedScrollHandler); // Add optimized listener
 
 // ==================
+// GALLERY MODAL FUNCTIONALITY
+// ==================
+
+// Gallery modal elements
+const galleryModal = document.getElementById('galleryModal');
+const galleryModalImage = document.getElementById('galleryModalImage');
+const galleryModalClose = document.getElementById('galleryModalClose');
+const galleryModalPrev = document.getElementById('galleryModalPrev');
+const galleryModalNext = document.getElementById('galleryModalNext');
+
+// Collect all gallery images
+const galleryImages = [
+    'assets/images/gallery1.jpg',
+    'assets/images/gallery2.jpg',
+    'assets/images/gallery3.jpg',
+    'assets/images/gallery4.jpg'
+];
+
+let currentGalleryIndex = 0;
+
+// Open gallery modal when clicking on a gallery image
+document.querySelectorAll('[data-gallery-img]').forEach((item) => {
+    item.addEventListener('click', function() {
+        const index = parseInt(this.getAttribute('data-gallery-img'));
+        openGalleryModal(index);
+    });
+});
+
+// Open gallery modal function
+function openGalleryModal(index) {
+    currentGalleryIndex = index;
+    galleryModalImage.src = galleryImages[currentGalleryIndex];
+    galleryModal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+// Close gallery modal
+function closeGalleryModal() {
+    galleryModal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+}
+
+// Navigate to previous image
+function prevGalleryImage() {
+    currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
+    galleryModalImage.src = galleryImages[currentGalleryIndex];
+}
+
+// Navigate to next image
+function nextGalleryImage() {
+    currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
+    galleryModalImage.src = galleryImages[currentGalleryIndex];
+}
+
+// Event listeners for gallery modal
+if (galleryModalClose) {
+    galleryModalClose.addEventListener('click', closeGalleryModal);
+}
+
+if (galleryModalPrev) {
+    galleryModalPrev.addEventListener('click', prevGalleryImage);
+}
+
+if (galleryModalNext) {
+    galleryModalNext.addEventListener('click', nextGalleryImage);
+}
+
+// Close modal when clicking outside the image
+if (galleryModal) {
+    galleryModal.addEventListener('click', function(event) {
+        if (event.target === galleryModal) {
+            closeGalleryModal();
+        }
+    });
+}
+
+// Keyboard navigation for gallery modal
+document.addEventListener('keydown', function(event) {
+    if (galleryModal && galleryModal.classList.contains('active')) {
+        if (event.key === 'ArrowLeft') {
+            prevGalleryImage();
+        } else if (event.key === 'ArrowRight') {
+            nextGalleryImage();
+        } else if (event.key === 'Escape') {
+            closeGalleryModal();
+        }
+    }
+});
+
+// ==================
+// VIDEO MODAL FUNCTIONALITY
+// ==================
+
+// Video modal elements
+const videoModal = document.getElementById('videoModal');
+const videoModalPlayer = document.getElementById('videoModalPlayer');
+const videoModalSource = document.getElementById('videoModalSource');
+const videoModalClose = document.getElementById('videoModalClose');
+
+// Open video modal when clicking on a video item
+document.querySelectorAll('[data-video-src]').forEach((item) => {
+    item.addEventListener('click', function() {
+        const videoSrc = this.getAttribute('data-video-src');
+        openVideoModal(videoSrc);
+    });
+});
+
+// Open video modal function
+function openVideoModal(videoSrc) {
+    videoModalSource.src = videoSrc;
+    videoModalPlayer.load();
+    videoModal.classList.add('active');
+    videoModalPlayer.play();
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+// Close video modal
+function closeVideoModal() {
+    videoModal.classList.remove('active');
+    videoModalPlayer.pause();
+    videoModalPlayer.currentTime = 0;
+    videoModalSource.src = '';
+    document.body.style.overflow = ''; // Restore scrolling
+}
+
+// Event listeners for video modal
+if (videoModalClose) {
+    videoModalClose.addEventListener('click', closeVideoModal);
+}
+
+// Close video modal when clicking outside
+if (videoModal) {
+    videoModal.addEventListener('click', function(event) {
+        if (event.target === videoModal) {
+            closeVideoModal();
+        }
+    });
+}
+
+// Close video modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (videoModal && videoModal.classList.contains('active') && event.key === 'Escape') {
+        closeVideoModal();
+    }
+});
+
+// ==================
 // PAGE LOAD COMPLETE
 // ==================
 
@@ -529,4 +676,6 @@ window.addEventListener('load', () => { // When entire page has loaded (includin
     console.log('🖼️ Image slider ready - Auto-sliding every 5 seconds'); // Print slider confirmation with auto-slide info
     console.log('📦 Packages loaded'); // Print packages confirmation
     console.log('🖼️ Logo modal ready - Click logo to view larger'); // Print logo modal confirmation
+    console.log('🖼️ Gallery modal ready - Click images to view in slider'); // Print gallery modal confirmation
+    console.log('🎬 Video modal ready - Click videos to enlarge'); // Print video modal confirmation
 });
