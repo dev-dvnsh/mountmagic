@@ -946,143 +946,419 @@ button { /* Button reset styling */
    RESPONSIVE DESIGN
    ================== */
 
-/* Tablet */
+/* Tablet */ /* Tablet-specific responsive styles with enhanced interactions */
 @media (max-width: 768px) {
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 70px;
-        flex-direction: column;
-        background-color: var(--white);
-        width: 100%;
-        text-align: center;
-        transition: left var(--transition-fast);
-        box-shadow: var(--shadow-lg);
-        padding: var(--spacing-md) 0;
-        gap: 0;
+    .nav-menu { /* Navigation menu */
+        position: fixed; /* Fixed position when opened */
+        left: -100%; /* Hidden off-screen to left */
+        top: 70px; /* Below header */
+        flex-direction: column; /* Vertical stacking */
+        background-color: var(--white); /* White background */
+        width: 100%; /* Full viewport width */
+        text-align: center; /* Center text */
+        transition: left var(--transition-fast); /* Smooth slide-in animation */
+        box-shadow: var(--shadow-lg); /* Large shadow for depth */
+        padding: var(--spacing-md) 0; /* Vertical padding */
+        gap: 0; /* No gap between items */
     }
     
-    .nav-menu.active {
-        left: 0;
+    .nav-menu.active { /* When menu is opened */
+        left: 0; /* Slide in from left */
     }
     
-    .nav-item {
-        width: 100%;
-        padding: var(--spacing-sm) 0;
-        border-bottom: 1px solid var(--light-gray);
+    .nav-item { /* Individual navigation items */
+        width: 100%; /* Full width */
+        padding: var(--spacing-sm) 0; /* Vertical padding for larger tap target */
+        border-bottom: 1px solid var(--light-gray); /* Separator line */
+        transition: background-color var(--transition-fast); /* Smooth background change */
     }
     
-    .hamburger {
-        display: flex;
+    /* Enhanced touch feedback for nav items on tablet */ /* Better tablet interaction */
+    .nav-item:active { /* When nav item is touched */
+        background-color: rgba(135, 206, 235, 0.1); /* Light blue background */
     }
     
-    .hero-title {
-        font-size: 2.5rem;
+    .hamburger { /* Hamburger menu icon */
+        display: flex; /* Make visible on tablet */
     }
     
-    .hero-subtitle {
-        font-size: 1.1rem;
+    /* Enhanced touch feedback for hamburger on tablet */ /* Better menu toggle */
+    .hamburger:active { /* When hamburger is touched */
+        transform: scale(0.9); /* Slight shrink */
+        opacity: 0.7; /* Reduce opacity */
     }
     
-    .section-title {
-        font-size: 2rem;
+    .hero-title { /* Hero section main title */
+        font-size: 2.5rem; /* Medium size for tablet */
     }
     
-    .slider-nav {
-        padding: 0 var(--spacing-sm);
+    .hero-subtitle { /* Hero section subtitle */
+        font-size: 1.1rem; /* Slightly smaller subtitle */
     }
     
-    .slider-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+    /* Enhanced touch feedback for CTA on tablet */ /* Better button interaction */
+    .cta-button:active { /* When CTA button is touched */
+        transform: translateY(-2px) scale(0.97); /* Lift and shrink */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18); /* Adjust shadow */
     }
     
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: var(--spacing-sm);
+    .section-title { /* Section heading titles */
+        font-size: 2rem; /* Medium size for tablet */
     }
     
-    .video-reviews-grid {
-        grid-template-columns: 1fr;
+    .slider-nav { /* Slider navigation container */
+        padding: 0 var(--spacing-sm); /* Reduced padding */
     }
     
-    .contact-content {
-        grid-template-columns: 1fr;
+    .slider-btn { /* Slider arrow buttons */
+        width: 40px; /* Smaller buttons on tablet */
+        height: 40px; /* Maintain square aspect */
+        font-size: 1.2rem; /* Smaller arrow icons */
+    }
+    
+    /* Enhanced touch feedback for slider buttons on tablet */ /* Better slider control */
+    .slider-btn:active { /* When slider button is touched */
+        transform: scale(0.85); /* Noticeable shrink */
+        background-color: rgba(255, 255, 255, 0.6); /* Increase opacity */
+    }
+    
+    /* Enhanced touch feedback for slider indicators on tablet */ /* Better indicator interaction */
+    .indicator:active { /* When indicator is touched */
+        transform: scale(1.4); /* Enlarge on press */
+        background-color: var(--sky-blue); /* Change color */
+    }
+    
+    .gallery-grid { /* Gallery grid layout */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Flexible columns */
+        gap: var(--spacing-sm); /* Smaller gap */
+    }
+    
+    /* Enhanced touch feedback for gallery items on tablet */ /* Better gallery interaction */
+    .gallery-item:active { /* When gallery item is touched */
+        transform: scale(0.98); /* Slight shrink */
+        opacity: 0.95; /* Slight transparency */
+    }
+    
+    /* Enhanced touch feedback for play buttons on tablet */ /* Better video control */
+    .play-btn:active { /* When play button is touched */
+        transform: scale(0.9); /* Shrink on press */
+        background-color: rgba(135, 206, 235, 0.9); /* Sky blue background */
+    }
+    
+    /* Enhanced touch feedback for package cards on tablet */ /* Better card interaction */
+    .package-card:active { /* When package card is touched */
+        transform: translateY(-8px) scale(0.98); /* Lift and shrink */
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18); /* Enhanced shadow */
+    }
+    
+    .view-details-btn:active { /* When view details button is touched */
+        transform: translateX(3px) scale(0.97); /* Slide right and shrink */
+        background-color: var(--primary-green); /* Darken background */
+    }
+    
+    /* Enhanced touch feedback for review cards on tablet */ /* Better review interaction */
+    .review-card:active { /* When review card is touched */
+        transform: translateY(-4px) scale(0.98); /* Lift and shrink */
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18); /* Enhanced shadow */
+    }
+    
+    .video-reviews-grid { /* Video reviews grid */
+        grid-template-columns: 1fr; /* Single column on tablet */
+    }
+    
+    /* Enhanced touch feedback for video review items on tablet */ /* Better video interaction */
+    .video-review-item:active { /* When video review is touched */
+        transform: scale(0.98); /* Slight shrink */
+        opacity: 0.95; /* Slight transparency */
+    }
+    
+    /* Enhanced touch feedback for view all buttons on tablet */ /* Better button interaction */
+    .view-all-btn:active { /* When view all button is touched */
+        transform: translateY(-2px) scale(0.96); /* Lift and shrink */
+        background-color: var(--primary-green); /* Darken background */
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    }
+    
+    .contact-content { /* Contact section layout */
+        grid-template-columns: 1fr; /* Single column on tablet */
+    }
+    
+    /* Enhanced touch feedback for contact items on tablet */ /* Better contact interaction */
+    .contact-item:active { /* When contact item is touched */
+        transform: scale(0.98); /* Slight shrink */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+    }
+    
+    /* Enhanced touch feedback for contact buttons on tablet */ /* Better button interaction */
+    .copy-btn:active, /* Copy button */
+    .call-btn:active, /* Call button */
+    .whatsapp-btn:active { /* WhatsApp button */
+        transform: scale(0.95); /* Shrink on press */
+    }
+    
+    .copy-btn:active { /* Copy button specific */
+        background-color: var(--dark-gray); /* Darken on press */
+        color: var(--white); /* White text */
+    }
+    
+    .call-btn:active { /* Call button specific */
+        background-color: var(--primary-green); /* Change to green */
+    }
+    
+    .whatsapp-btn:active { /* WhatsApp button specific */
+        background-color: #1da851; /* Darker green */
+    }
+    
+    /* Improve tap targets on tablet */ /* Better touch usability */
+    button, /* All buttons */
+    a, /* All links */
+    .indicator, /* Slider indicators */
+    .play-btn { /* Play buttons */
+        min-height: 44px; /* Minimum touch target height */
+        min-width: 44px; /* Minimum touch target width */
+    }
+    
+    /* Remove tap highlight on tablet */ /* Cleaner touch feedback */
+    button, /* All buttons */
+    a, /* All links */
+    .hamburger, /* Hamburger menu */
+    .nav-link { /* Navigation links */
+        -webkit-tap-highlight-color: transparent; /* Remove default highlight */
+        -webkit-touch-callout: none; /* Disable callout */
     }
 }
 
-/* Mobile */
+/* Mobile */ /* Mobile-specific responsive styles with enhanced touch interactions */
 @media (max-width: 480px) {
-    .brand-name {
-        font-size: 1.5rem;
+    .brand-name { /* Company name in navbar */
+        font-size: 1.5rem; /* Smaller font for mobile */
     }
     
-    .logo {
-        width: 40px;
-        height: 40px;
+    .logo { /* Circular logo image */
+        width: 40px; /* Smaller logo on mobile */
+        height: 40px; /* Maintain square aspect */
     }
     
-    .hero-title {
-        font-size: 2rem;
+    .hero-title { /* Main hero section title */
+        font-size: 2rem; /* Reduce size for mobile screens */
     }
     
-    .hero-subtitle {
-        font-size: 1rem;
+    .hero-subtitle { /* Hero section subtitle text */
+        font-size: 1rem; /* Smaller subtitle on mobile */
     }
     
-    .cta-button {
-        padding: 0.8rem 1.8rem;
-        font-size: 1rem;
+    .cta-button { /* Call-to-action button in hero */
+        padding: 0.8rem 1.8rem; /* Slightly smaller padding */
+        font-size: 1rem; /* Reduce font size */
     }
     
-    .section-title {
-        font-size: 1.8rem;
+    /* Enhanced touch feedback for CTA button on mobile */ /* Better mobile interaction */
+    .cta-button:active { /* When button is being pressed/touched */
+        transform: scale(0.95); /* Shrink slightly when pressed */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Reduce shadow depth */
     }
     
-    .section-subtitle {
-        font-size: 1rem;
+    .section-title { /* Section heading titles */
+        font-size: 1.8rem; /* Smaller section titles */
     }
     
-    .gallery-grid {
-        grid-template-columns: 1fr;
+    .section-subtitle { /* Section subtitle text */
+        font-size: 1rem; /* Reduce subtitle size */
     }
     
-    .packages-grid {
-        grid-template-columns: 1fr;
+    .gallery-grid { /* Gallery layout grid */
+        grid-template-columns: 1fr; /* Single column on mobile */
     }
     
-    .reviews-grid {
-        grid-template-columns: 1fr;
+    /* Enhanced touch feedback for gallery items */ /* Better mobile gallery interaction */
+    .gallery-item:active { /* When gallery item is touched */
+        transform: scale(0.98); /* Slight shrink effect */
+        opacity: 0.9; /* Slight transparency */
     }
     
-    .about-features {
-        grid-template-columns: 1fr;
+    .packages-grid { /* Package cards grid */
+        grid-template-columns: 1fr; /* Single column layout */
     }
     
-    .slider-indicators {
-        bottom: 20px;
-        gap: 10px;
+    /* Enhanced touch feedback for package cards */ /* Better mobile card interaction */
+    .package-card:active { /* When package card is touched */
+        transform: translateY(-5px) scale(0.98); /* Slight lift and shrink */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Adjust shadow */
     }
     
-    .indicator {
-        width: 10px;
-        height: 10px;
+    .view-details-btn:active { /* When "View Details" button is touched */
+        transform: scale(0.95); /* Shrink on press */
+        background-color: var(--primary-green); /* Darken background */
     }
     
-    .contact-actions {
-        flex-direction: column;
+    .reviews-grid { /* Reviews cards grid */
+        grid-template-columns: 1fr; /* Single column for reviews */
     }
     
-    .copy-btn,
-    .call-btn,
-    .whatsapp-btn {
-        width: 100%;
-        text-align: center;
+    /* Enhanced touch feedback for review cards */ /* Better mobile review interaction */
+    .review-card:active { /* When review card is touched */
+        transform: translateY(-3px) scale(0.98); /* Slight lift and shrink */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Adjust shadow */
     }
     
-    .google-form {
-        height: 500px;
+    .about-features { /* About section features grid */
+        grid-template-columns: 1fr; /* Single column for features */
+    }
+    
+    /* Enhanced touch feedback for feature cards */ /* Better mobile feature interaction */
+    .feature:active { /* When feature card is touched */
+        transform: translateY(-3px) scale(0.98); /* Slight lift and shrink */
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12); /* Adjust shadow */
+    }
+    
+    .slider-indicators { /* Hero slider indicator dots */
+        bottom: 20px; /* Position from bottom */
+        gap: 10px; /* Space between dots */
+    }
+    
+    .indicator { /* Individual indicator dot */
+        width: 10px; /* Smaller dots on mobile */
+        height: 10px; /* Maintain circular shape */
+    }
+    
+    /* Enhanced touch feedback for slider indicators */ /* Better mobile slider interaction */
+    .indicator:active { /* When indicator dot is touched */
+        transform: scale(1.5); /* Enlarge on press */
+        background-color: var(--sky-blue); /* Change color for feedback */
+    }
+    
+    /* Enhanced touch feedback for slider buttons */ /* Better mobile slider control */
+    .slider-btn:active { /* When slider arrow button is touched */
+        transform: scale(0.9); /* Shrink on press */
+        background-color: rgba(255, 255, 255, 0.6); /* Increase opacity */
+    }
+    
+    .contact-actions { /* Contact button container */
+        flex-direction: column; /* Stack buttons vertically */
+    }
+    
+    .copy-btn, /* Copy number button */
+    .call-btn, /* Call button */
+    .whatsapp-btn { /* WhatsApp button */
+        width: 100%; /* Full width buttons */
+        text-align: center; /* Center text */
+        padding: 0.8rem 1.2rem; /* Larger padding for easier touch */
+    }
+    
+    /* Enhanced touch feedback for contact buttons */ /* Better mobile contact interaction */
+    .copy-btn:active { /* When copy button is touched */
+        transform: scale(0.97); /* Shrink slightly */
+        background-color: var(--dark-gray); /* Darken on press */
+        color: var(--white); /* White text */
+    }
+    
+    .call-btn:active { /* When call button is touched */
+        transform: scale(0.97); /* Shrink slightly */
+        background-color: var(--primary-green); /* Change to green */
+    }
+    
+    .whatsapp-btn:active { /* When WhatsApp button is touched */
+        transform: scale(0.97); /* Shrink slightly */
+        background-color: #1da851; /* Darker green on press */
+    }
+    
+    .google-form { /* Google form iframe */
+        height: 500px; /* Reduce height on mobile */
+    }
+    
+    /* Enhanced touch feedback for play buttons */ /* Better mobile video control */
+    .play-btn:active { /* When video play button is touched */
+        transform: scale(0.9); /* Shrink on press */
+        background-color: var(--secondary-green); /* Change color */
+        color: var(--white); /* White icon */
+    }
+    
+    /* Enhanced touch feedback for view all buttons */ /* Better mobile navigation */
+    .view-all-btn:active { /* When "View All" button is touched */
+        transform: translateY(-2px) scale(0.97); /* Slight lift and shrink */
+        background-color: var(--primary-green); /* Darken background */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Adjust shadow */
+    }
+    
+    /* Enhanced touch feedback for navigation menu items */ /* Better mobile nav interaction */
+    .nav-link:active { /* When nav link is touched */
+        color: var(--sky-blue); /* Change to blue */
+        background-color: rgba(135, 206, 235, 0.1); /* Light blue background */
+    }
+    
+    /* Enhanced touch feedback for hamburger menu */ /* Better mobile menu toggle */
+    .hamburger:active { /* When hamburger icon is touched */
+        transform: scale(0.9); /* Shrink on press */
+        opacity: 0.7; /* Reduce opacity */
+    }
+    
+    /* Improve tap targets for better mobile usability */ /* Ensure touch areas are large enough */
+    .nav-link, /* Navigation links */
+    .indicator, /* Slider indicators */
+    .play-btn, /* Video play buttons */
+    button, /* All buttons */
+    a { /* All links */
+        min-height: 44px; /* Minimum touch target size (Apple HIG recommendation) */
+        min-width: 44px; /* Minimum touch target width */
+        display: inline-flex; /* Use flexbox for centering */
+        align-items: center; /* Center content vertically */
+        justify-content: center; /* Center content horizontally */
+    }
+    
+    /* Prevent text selection on touch for better UX */ /* Avoid unwanted text selection */
+    .cta-button, /* CTA buttons */
+    .view-details-btn, /* View details buttons */
+    .view-all-btn, /* View all buttons */
+    .copy-btn, /* Copy button */
+    .call-btn, /* Call button */
+    .whatsapp-btn, /* WhatsApp button */
+    .play-btn, /* Play buttons */
+    .slider-btn, /* Slider buttons */
+    .indicator, /* Slider indicators */
+    .hamburger { /* Hamburger menu */
+        -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+        -webkit-touch-callout: none; /* Disable callout on iOS */
+        -webkit-user-select: none; /* Prevent text selection on touch */
+        user-select: none; /* Prevent text selection */
+    }
+    
+    /* Add subtle ripple effect for material design feel */ /* Modern touch feedback */
+    @keyframes ripple { /* Ripple animation keyframes */
+        0% { /* Start state */
+            transform: scale(0); /* Start from center */
+            opacity: 1; /* Fully visible */
+        }
+        100% { /* End state */
+            transform: scale(4); /* Expand outward */
+            opacity: 0; /* Fade out */
+        }
+    }
+    
+    /* Improve scroll performance on mobile */ /* Smoother scrolling */
+    * { /* Apply to all elements */
+        -webkit-overflow-scrolling: touch; /* Momentum scrolling on iOS */
+    }
+    
+    /* Larger contact items on mobile for easier tapping */ /* Better touch targets */
+    .contact-item { /* Contact information cards */
+        padding: var(--spacing-md) var(--spacing-sm); /* Increase padding */
+        margin-bottom: var(--spacing-sm); /* Add space between items */
+    }
+    
+    .contact-item:active { /* When contact item is touched */
+        transform: scale(0.98); /* Slight shrink */
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12); /* Adjust shadow */
+    }
+    
+    /* Improve footer links on mobile */ /* Better footer navigation */
+    .footer-links a { /* Footer navigation links */
+        padding: var(--spacing-xs) 0; /* Add vertical padding */
+        display: block; /* Full width clickable area */
+    }
+    
+    .footer-links a:active { /* When footer link is touched */
+        color: var(--sky-blue); /* Change color */
+        padding-left: 10px; /* Indent on press */
     }
 }
 
