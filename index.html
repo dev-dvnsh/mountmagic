@@ -1,0 +1,408 @@
+<!DOCTYPE html> <!-- Declares this as an HTML5 document -->
+<html lang="en"> <!-- Root element, sets language to English -->
+<head> <!-- Contains metadata and links to external resources -->
+    <meta charset="UTF-8"> <!-- Sets character encoding to UTF-8 for proper text display -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes website responsive on mobile devices -->
+    <meta name="description" content="MountMagic - Your trusted partner for mountain adventures and travel experiences"> <!-- SEO meta description -->
+    <title>MountMagic - Mountain Adventure Tourism</title> <!-- Page title shown in browser tab -->
+    
+    <!-- Google Fonts --> <!-- Importing custom fonts from Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Preconnect to Google's static font content -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Import Poppins and Montserrat fonts with multiple weights -->
+    
+    <!-- Stylesheet --> <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Main stylesheet for all page styling -->
+</head> <!-- End of head section -->
+<body> <!-- Start of visible page content -->
+    
+    <!-- HEADER / NAVBAR --> <!-- Fixed navigation bar at top of page -->
+    <header class="header" id="header"> <!-- Header element with ID for JavaScript targeting -->
+        <nav class="navbar"> <!-- Navigation container -->
+            <div class="nav-container"> <!-- Inner container for navbar content -->
+                <!-- Logo and Brand --> <!-- Company branding section -->
+                <div class="nav-brand"> <!-- Flex container for logo and name -->
+                    <img src="assets/logo.png" alt="MountMagic Logo" class="logo" id="logoImage" style="cursor: pointer;"> <!-- Clickable circular logo, opens modal when clicked -->
+                    <span class="brand-name">MountMagic</span> <!-- Company name displayed next to logo -->
+                </div>
+                
+                <!-- Navigation Menu --> <!-- Main navigation links -->
+                <ul class="nav-menu" id="navMenu"> <!-- Unordered list for nav items, toggles on mobile -->
+                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li> <!-- Link to home/hero section -->
+                    <li class="nav-item"><a href="#gallery" class="nav-link">Gallery</a></li> <!-- Link to gallery section -->
+                    <li class="nav-item"><a href="#packages" class="nav-link">Packages</a></li> <!-- Link to packages section -->
+                    <li class="nav-item"><a href="#reviews" class="nav-link">Reviews</a></li> <!-- Link to reviews section -->
+                    <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li> <!-- Link to about section -->
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li> <!-- Link to contact section -->
+                </ul> <!-- End of navigation menu -->
+                
+                <!-- Hamburger Menu --> <!-- Mobile menu toggle button -->
+                <div class="hamburger" id="hamburger"> <!-- Three-line hamburger icon for mobile -->
+                    <span class="bar"></span> <!-- First line of hamburger icon -->
+                    <span class="bar"></span> <!-- Second line of hamburger icon -->
+                    <span class="bar"></span> <!-- Third line of hamburger icon -->
+                </div> <!-- End of hamburger menu -->
+            </div> <!-- End of nav container -->
+        </nav> <!-- End of navbar -->
+    </header> <!-- End of header -->
+
+    <!-- HOME / HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-slider">
+            <!-- Slide 1 -->
+            <div class="hero-slide active">
+                <img src="assets/images/hero1.jpg" alt="Mountain Adventure" class="hero-image">
+                <div class="hero-overlay"></div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="hero-slide">
+                <img src="assets/images/hero2.jpg" alt="Scenic Beauty" class="hero-image">
+                <div class="hero-overlay"></div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="hero-slide">
+                <img src="assets/images/hero3.jpg" alt="Adventure Awaits" class="hero-image">
+                <div class="hero-overlay"></div>
+            </div>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h1 class="hero-title">Discover the Magic of Mountains</h1>
+            <p class="hero-subtitle">Experience unforgettable adventures with MountMagic - Your trusted mountain travel companion</p>
+            <a href="#packages" class="cta-button">Explore Packages</a>
+        </div>
+        
+        <!-- Slider Navigation -->
+        <div class="slider-nav">
+            <button class="slider-btn prev-btn" id="prevBtn">&larr;</button>
+            <button class="slider-btn next-btn" id="nextBtn">&rarr;</button>
+        </div>
+        
+        <!-- Slider Indicators -->
+        <div class="slider-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Gallery</h2>
+                <p class="section-subtitle">Explore the breathtaking moments captured during our adventures</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <!-- Gallery Image 1 -->
+                <div class="gallery-item">
+                    <img src="assets/images/gallery1.jpg" alt="Gallery Image 1" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-icon">📷</span>
+                    </div>
+                </div>
+                
+                <!-- Gallery Image 2 -->
+                <div class="gallery-item">
+                    <img src="assets/images/gallery2.jpg" alt="Gallery Image 2" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-icon">📷</span>
+                    </div>
+                </div>
+                
+                <!-- Gallery Image 3 -->
+                <div class="gallery-item">
+                    <img src="assets/images/gallery3.jpg" alt="Gallery Image 3" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-icon">📷</span>
+                    </div>
+                </div>
+                
+                <!-- Gallery Video 1 -->
+                <div class="gallery-item video-item">
+                    <video class="gallery-video" data-video-id="1">
+                        <source src="assets/videos/gallery1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-controls">
+                        <button class="play-btn" data-video-id="1">▶</button>
+                    </div>
+                </div>
+                
+                <!-- Gallery Image 4 -->
+                <div class="gallery-item">
+                    <img src="assets/images/gallery4.jpg" alt="Gallery Image 4" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-icon">📷</span>
+                    </div>
+                </div>
+                
+                <!-- Gallery Video 2 -->
+                <div class="gallery-item video-item">
+                    <video class="gallery-video" data-video-id="2">
+                        <source src="assets/videos/gallery2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-controls">
+                        <button class="play-btn" data-video-id="2">▶</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PACKAGES SECTION -->
+    <section class="packages" id="packages">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Packages</h2>
+                <p class="section-subtitle">Choose from our carefully curated travel packages</p>
+            </div>
+            
+            <div class="packages-grid" id="packagesGrid">
+                <!-- Packages will be dynamically loaded from JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS SECTION -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our Travelers Say</h2>
+                <p class="section-subtitle">Real experiences from real adventurers</p>
+            </div>
+            
+            <!-- TEXT REVIEWS -->
+            <div class="text-reviews">
+                <h3 class="subsection-title">Customer Reviews</h3>
+                <div class="reviews-grid">
+                    <!-- Review 1 -->
+                    <div class="review-card">
+                        <img src="assets/images/review1.jpg" alt="Reviewer 1" class="reviewer-image">
+                        <div class="review-content">
+                            <div class="rating">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"MountMagic made our Himalayan adventure absolutely unforgettable! The team was professional, knowledgeable, and ensured every detail was perfect. Highly recommended for anyone seeking authentic mountain experiences."</p>
+                            <h4 class="reviewer-name">Priya Sharma</h4>
+                            <p class="reviewer-location">Delhi, India</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Review 2 -->
+                    <div class="review-card">
+                        <img src="assets/images/review2.jpg" alt="Reviewer 2" class="reviewer-image">
+                        <div class="review-content">
+                            <div class="rating">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Best travel experience ever! From Shimla to Spiti, every moment was magical. The guides were friendly, accommodations were excellent, and the entire journey was well-organized. Thank you MountMagic!"</p>
+                            <h4 class="reviewer-name">Rajesh Kumar</h4>
+                            <p class="reviewer-location">Mumbai, India</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Review 3 -->
+                    <div class="review-card">
+                        <img src="assets/images/review3.jpg" alt="Reviewer 3" class="reviewer-image">
+                        <div class="review-content">
+                            <div class="rating">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Wonderful experience with MountMagic! The Manali package exceeded all expectations. Beautiful locations, comfortable stays, and amazing local insights. Will definitely book again!"</p>
+                            <h4 class="reviewer-name">Anita Desai</h4>
+                            <p class="reviewer-location">Bangalore, India</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reviews-button-container">
+                    <button class="view-all-btn">View All Reviews</button>
+                </div>
+            </div>
+            
+            <!-- VIDEO REVIEWS -->
+            <div class="video-reviews">
+                <h3 class="subsection-title">Video Testimonials</h3>
+                <div class="video-reviews-grid">
+                    <!-- Video Review 1 -->
+                    <div class="video-review-item">
+                        <video class="review-video" data-video-id="review1">
+                            <source src="assets/videos/review1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-controls">
+                            <button class="play-btn" data-video-id="review1">▶</button>
+                        </div>
+                        <div class="video-review-info">
+                            <h4>Adventure in Kasol</h4>
+                            <p>Watch Sarah's journey</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Review 2 -->
+                    <div class="video-review-item">
+                        <video class="review-video" data-video-id="review2">
+                            <source src="assets/videos/review2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-controls">
+                            <button class="play-btn" data-video-id="review2">▶</button>
+                        </div>
+                        <div class="video-review-info">
+                            <h4>Spiti Valley Experience</h4>
+                            <p>Hear from Vikram</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reviews-button-container">
+                    <button class="view-all-btn">View All Videos</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">About MountMagic</h2>
+                    <p class="about-description">
+                        At <strong>MountMagic</strong>, we believe that the mountains hold a special kind of magic - one that transforms, inspires, and rejuvenates the soul. Founded by passionate travelers and mountain enthusiasts, we are dedicated to bringing you authentic and unforgettable experiences in the lap of the Himalayas.
+                    </p>
+                    <p class="about-description">
+                        With years of expertise in mountain tourism, our team of local guides and travel experts ensures that every journey is safe, comfortable, and filled with adventure. From the snow-capped peaks of Shimla to the rugged terrains of Spiti Valley, we curate experiences that connect you with nature, culture, and yourself.
+                    </p>
+                    <p class="about-description">
+                        We are a <strong>trusted local travel agency</strong> committed to sustainable tourism practices, supporting local communities, and preserving the natural beauty of our mountain destinations. Whether you're seeking a peaceful retreat or an adrenaline-pumping adventure, MountMagic is your perfect companion.
+                    </p>
+                    <div class="about-features">
+                        <div class="feature">
+                            <span class="feature-icon">🏔️</span>
+                            <h4>Mountain Expertise</h4>
+                            <p>Years of experience in Himalayan tourism</p>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🧭</span>
+                            <h4>Adventure Focused</h4>
+                            <p>Thrilling experiences for every adventurer</p>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🤝</span>
+                            <h4>Trusted Locally</h4>
+                            <p>Strong community connections and support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT US SECTION -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Ready to start your mountain adventure? Contact us today!</p>
+            </div>
+            
+            <div class="contact-content">
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <div class="contact-item"> <!-- Contact item for phone number -->
+                        <span class="contact-icon">📞</span> <!-- Phone icon -->
+                        <div class="contact-details"> <!-- Container for phone details -->
+                            <h4>Call or WhatsApp</h4> <!-- Heading for phone section -->
+                            <p class="phone-number" id="phoneNumber">+91 9805440345</p> <!-- Display phone number (clickable for copy) -->
+                            <div class="contact-actions"> <!-- Action buttons container -->
+                                <button class="copy-btn" id="copyBtn">Copy Number</button> <!-- Button to copy number to clipboard -->
+                                <a href="tel:+919805440345" class="call-btn">Call Now</a> <!-- Link to initiate phone call -->
+                                <a href="https://wa.me/919805440345" target="_blank" class="whatsapp-btn">WhatsApp</a> <!-- Link to open WhatsApp chat -->
+                            </div> <!-- End of action buttons -->
+                            <span class="copy-feedback" id="copyFeedback">Number copied!</span> <!-- Feedback message shown after copying -->
+                        </div> <!-- End of phone details -->
+                    </div> <!-- End of phone contact item -->
+                    
+                    <div class="contact-item"> <!-- Contact item for email -->
+                        <span class="contact-icon">📧</span> <!-- Email icon -->
+                        <div class="contact-details"> <!-- Container for email details -->
+                            <h4>Email Us</h4> <!-- Heading for email section -->
+                            <p><a href="mailto:mountmagic24@gmail.com" style="color: inherit;">mountmagic24@gmail.com</a></p> <!-- Email address with mailto link -->
+                        </div> <!-- End of email details -->
+                    </div> <!-- End of email contact item -->
+                    
+                    <div class="contact-item"> <!-- Contact item for location -->
+                        <span class="contact-icon">📍</span> <!-- Location pin icon -->
+                        <div class="contact-details"> <!-- Container for location details -->
+                            <h4>Visit Us</h4> <!-- Heading for location section -->
+                            <p>Namhol, Shimla-Kangra Road, District Bilasput, Himachal Pradesh, India</p> <!-- Physical address -->
+                        </div> <!-- End of location details -->
+                    </div> <!-- End of location contact item -->
+                    
+                    <div class="contact-item"> <!-- Contact item for Instagram -->
+                        <span class="contact-icon">📸</span> <!-- Instagram/camera icon -->
+                        <div class="contact-details"> <!-- Container for Instagram details -->
+                            <h4>Follow Us on Instagram</h4> <!-- Heading for Instagram section -->
+                            <p><a href="https://www.instagram.com/mountmagic24" target="_blank" style="color: inherit;">@mountmagic24</a></p> <!-- Instagram handle with link -->
+                        </div> <!-- End of Instagram details -->
+                    </div> <!-- End of Instagram contact item -->
+                </div> <!-- End of contact info container -->
+                
+                <!-- Contact Form (Google Form Embed) -->
+                <div class="contact-form-container">
+                    <h3>Send Us a Message</h3>
+                    <p class="form-note">Fill out the form below and we'll get back to you shortly</p>
+                    <!-- Placeholder for Google Form - Replace the src URL with your actual Google Form embed URL -->
+                    <iframe 
+                        src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" 
+                        class="google-form"
+                        frameborder="0"
+                        marginheight="0"
+                        marginwidth="0">
+                        Loading…
+                    </iframe>
+                    <p class="form-note">Replace the iframe src with your Google Form URL</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MountMagic</h4>
+                    <p>Your trusted partner for mountain adventures and unforgettable travel experiences.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#packages">Packages</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section"> <!-- Footer contact section -->
+                    <h4>Contact</h4> <!-- Contact heading -->
+                    <p>Phone: +91 9805440345</p> <!-- Phone number -->
+                    <p>Email: mountmagic24@gmail.com</p> <!-- Email address -->
+                    <p>Instagram: @mountmagic24</p> <!-- Instagram handle -->
+                    <p>Shimla, Himachal Pradesh</p> <!-- Location -->
+                </div> <!-- End of footer contact section -->
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 MountMagic. All rights reserved. | Designed for mountain lovers ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logo Modal --> <!-- Modal popup for viewing logo in full size -->
+    <div id="logoModal" class="logo-modal"> <!-- Modal overlay container -->
+        <span class="logo-modal-close" id="logoModalClose">&times;</span> <!-- Close button (X) for modal -->
+        <img class="logo-modal-content" id="logoModalImage"> <!-- Large version of logo displayed in modal -->
+        <div class="logo-modal-caption">MountMagic - Your Mountain Adventure Partner</div> <!-- Caption text below logo -->
+    </div> <!-- End of logo modal -->
+
+    <!-- JavaScript --> <!-- Link to external JavaScript file -->
+    <script src="js/main.js"></script> <!-- Main JavaScript file with all functionality -->
+</body> <!-- End of body section -->
+</html> <!-- End of HTML document -->
