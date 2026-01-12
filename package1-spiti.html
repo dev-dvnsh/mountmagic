@@ -1,0 +1,671 @@
+<!DOCTYPE html> <!-- Declares this as an HTML5 document -->
+<html lang="en"> <!-- Root element, sets language to English -->
+<head> <!-- Contains metadata and links to external resources -->
+    <meta charset="UTF-8"> <!-- Sets character encoding to UTF-8 for proper text display -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes website responsive on mobile devices -->
+    <meta name="description" content="Spiti Valley Expedition - 8 Days adventure through Himalayas with MountMagic"> <!-- SEO meta description -->
+    <title>Spiti Valley Expedition - MountMagic</title> <!-- Page title shown in browser tab -->
+    
+    <!-- Google Fonts --> <!-- Importing custom fonts from Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Preconnect to Google's static font content -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Import Poppins and Montserrat fonts -->
+    
+    <!-- Stylesheet --> <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Main stylesheet for all page styling -->
+    
+    <!-- Package Detail Page Styles --> <!-- Additional styles for detail page -->
+    <style>
+        /* Package detail page specific styles */ /* Styles only for this page */
+        .package-detail-header {
+            position: relative;
+            margin-top: 70px;
+            overflow: hidden;
+        }
+        
+        .header-slider-container {
+            position: relative;
+            height: 65vh;
+            min-height: 450px;
+        }
+        
+        .header-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .header-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        
+        .header-slide.active {
+            opacity: 1;
+        }
+        
+        .header-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.75);
+        }
+        
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(45,80,22,0.7) 100%);
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            color: var(--white);
+            text-align: center;
+            z-index: 2;
+            padding: 0 20px;
+        }
+        
+        .package-detail-title {
+            font-family: var(--font-secondary);
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 3px 8px rgba(0,0,0,0.4);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .package-detail-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            text-shadow: 1px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 500;
+        }
+        
+        .package-detail-route {
+            font-size: 1.05rem;
+            opacity: 0.92;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .header-slider-controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+            z-index: 3;
+        }
+        
+        .header-prev,
+        .header-next {
+            background: rgba(255,255,255,0.25);
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .header-prev:hover,
+        .header-next:hover {
+            background: rgba(255,255,255,0.4);
+            transform: scale(1.08);
+        }
+        
+        .header-slider-dots {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 3;
+        }
+        
+        .header-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .header-dot.active {
+            background: white;
+            width: 35px;
+            border-radius: 6px;
+        }
+        
+        .package-detail-content { /* Main content area */
+            padding: var(--spacing-xl) 0; /* Large padding */
+            background-color: var(--off-white); /* Light background */
+        }
+        
+        .itinerary-section { /* Itinerary section */
+            margin-bottom: var(--spacing-xl); /* Space below */
+        }
+        
+        .itinerary-day {
+            background-color: var(--white);
+            border-radius: 14px;
+            padding: 0;
+            margin-bottom: 28px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 4px solid var(--primary-green);
+        }
+        
+        .itinerary-day:nth-child(even) {
+            border-left-color: var(--secondary-green);
+        }
+        
+        .itinerary-day:hover {
+            transform: translateY(-6px) translateX(3px);
+            box-shadow: 0 12px 35px rgba(45,80,22,0.18);
+        }
+        
+        .day-header {
+            background: linear-gradient(125deg, var(--primary-green) 0%, var(--secondary-green) 95%);
+            color: var(--white);
+            padding: 22px 24px;
+            position: relative;
+        }
+        
+        .day-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--light-green) 0%, transparent 100%);
+        }
+        
+        .day-title { /* Day title (e.g., "Day 1") */
+            font-family: var(--font-secondary); /* Montserrat font */
+            color: var(--white); /* White color */
+            font-size: 1.8rem; /* Large font */
+            margin-bottom: var(--spacing-xs); /* Small space below */
+            display: flex; /* Flexbox for alignment */
+            align-items: center; /* Center vertically */
+            gap: 10px; /* Space between icon and text */
+        }
+        
+        .day-subtitle { /* Day subtitle (route) */
+            color: var(--white); /* White color */
+            font-weight: 500; /* Medium weight */
+            font-size: 1.1rem; /* Medium font */
+            opacity: 0.95; /* Slightly transparent */
+        }
+        
+        .day-content { /* Content area of day card */
+            padding: var(--spacing-md); /* Medium padding */
+            display: grid; /* Grid layout */
+            grid-template-columns: 1fr; /* Single column by default */
+            gap: var(--spacing-md); /* Space between elements */
+        }
+        
+        .day-images { /* Images container for each day */
+            display: grid; /* Grid layout */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+            gap: var(--spacing-sm); /* Space between images */
+            margin-bottom: var(--spacing-sm); /* Space below */
+        }
+        
+        .day-image { /* Individual day image */
+            border-radius: 8px; /* Rounded corners */
+            overflow: hidden; /* Hide overflow */
+            box-shadow: var(--shadow-sm); /* Small shadow */
+            aspect-ratio: 4/3; /* Maintain aspect ratio */
+            background-color: var(--light-gray); /* Placeholder background */
+        }
+        
+        .day-image img { /* Image element */
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            object-fit: cover; /* Cover the area */
+            transition: transform var(--transition-fast); /* Smooth zoom */
+        }
+        
+        .day-image:hover img { /* Hover effect on images */
+            transform: scale(1.1); /* Zoom in */
+        }
+        
+        .day-description { /* Day description text */
+            color: var(--dark-gray); /* Dark gray */
+            line-height: 1.8; /* Comfortable line height */
+            white-space: pre-line; /* Preserve line breaks */
+            font-size: 1.05rem; /* Slightly larger font */
+        }
+        
+        .gallery-section { /* Media gallery section */
+            margin-bottom: var(--spacing-xl); /* Space below */
+        }
+        
+        .media-grid { /* Grid for images and videos */
+            display: grid; /* Grid layout */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+            gap: var(--spacing-md); /* Space between items */
+        }
+        
+        .media-item { /* Individual media item */
+            border-radius: 12px; /* Rounded corners */
+            overflow: hidden; /* Hide overflow */
+            box-shadow: var(--shadow-md); /* Medium shadow */
+            background-color: #000; /* Black background */
+            aspect-ratio: 16/9; /* Maintain aspect ratio */
+        }
+        
+        .media-item img, /* Images in media grid */
+        .media-item video { /* Videos in media grid */
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            object-fit: cover; /* Cover the area */
+        }
+        
+        .cta-section { /* Call to action section */
+            background-color: var(--off-white); /* Light gray background */
+            padding: var(--spacing-xl); /* Large padding */
+            text-align: center; /* Center align */
+            border-radius: 12px; /* Rounded corners */
+            margin-bottom: var(--spacing-xl); /* Space below */
+        }
+        
+        .cta-title { /* CTA title */
+            font-family: var(--font-secondary); /* Montserrat font */
+            font-size: 2rem; /* Large font */
+            color: var(--primary-green); /* Green color */
+            margin-bottom: var(--spacing-sm); /* Space below */
+        }
+        
+        .cta-buttons { /* CTA buttons container */
+            display: flex; /* Flexbox layout */
+            gap: var(--spacing-md); /* Space between buttons */
+            justify-content: center; /* Center buttons */
+            flex-wrap: wrap; /* Wrap on small screens */
+            margin-top: var(--spacing-md); /* Space above */
+        }
+        
+        .cta-btn { /* Individual CTA button */
+            padding: 1rem 2rem; /* Large padding */
+            border-radius: 50px; /* Fully rounded */
+            font-weight: 600; /* Semi-bold */
+            font-size: 1.1rem; /* Medium-large font */
+            transition: all var(--transition-fast); /* Smooth transitions */
+            text-decoration: none; /* No underline */
+            display: inline-block; /* Inline block display */
+        }
+        
+        .cta-btn-primary { /* Primary CTA button */
+            background-color: var(--secondary-green); /* Green background */
+            color: var(--white); /* White text */
+        }
+        
+        .cta-btn-primary:hover { /* Primary button hover */
+            background-color: var(--primary-green); /* Darker green */
+            transform: translateY(-3px); /* Lift up */
+            box-shadow: var(--shadow-lg); /* Large shadow */
+        }
+        
+        .cta-btn-secondary { /* Secondary CTA button */
+            background-color: #25d366; /* WhatsApp green */
+            color: var(--white); /* White text */
+        }
+        
+        .cta-btn-secondary:hover { /* Secondary button hover */
+            background-color: #20ba5a; /* Darker WhatsApp green */
+            transform: translateY(-3px); /* Lift up */
+            box-shadow: var(--shadow-lg); /* Large shadow */
+        }
+        
+        /* Mobile responsive styles */ /* Adjust for mobile screens */
+        @media (max-width: 768px) {
+            .package-detail-title { /* Mobile title size */
+                font-size: 2rem; /* Smaller font */
+            }
+            
+            .media-grid { /* Mobile media grid */
+                grid-template-columns: 1fr; /* Single column */
+            }
+            
+            .cta-buttons { /* Mobile CTA buttons */
+                flex-direction: column; /* Stack vertically */
+            }
+            
+            .cta-btn { /* Mobile CTA button */
+                width: 100%; /* Full width */
+            }
+        }
+    </style>
+</head>
+<body> <!-- Start of visible page content -->
+
+    <!-- HEADER / NAVBAR --> <!-- Fixed navigation bar at top of page -->
+    <header class="header" id="header"> <!-- Header element with ID for JavaScript targeting -->
+        <nav class="navbar"> <!-- Navigation container -->
+            <div class="nav-container"> <!-- Inner container for navbar content -->
+                <div class="nav-brand"> <!-- Company branding section -->
+                    <a href="index.html"> <!-- Link back to home page -->
+                        <img src="assets/logo.png" alt="MountMagic Logo" class="logo"> <!-- Company logo -->
+                    </a>
+                    <a href="index.html" style="text-decoration: none; color: inherit;"> <!-- Link to home -->
+                        <span class="brand-name">MountMagic</span> <!-- Company name -->
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="navMenu"> <!-- Navigation menu -->
+                    <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li> <!-- Home link -->
+                    <li class="nav-item"><a href="index.html#gallery" class="nav-link">Gallery</a></li> <!-- Gallery link -->
+                    <li class="nav-item"><a href="index.html#packages" class="nav-link">Packages</a></li> <!-- Packages link -->
+                    <li class="nav-item"><a href="index.html#reviews" class="nav-link">Reviews</a></li> <!-- Reviews link -->
+                    <li class="nav-item"><a href="index.html#about" class="nav-link">About Us</a></li> <!-- About link -->
+                    <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li> <!-- Contact link -->
+                </ul>
+                
+                <div class="hamburger" id="hamburger"> <!-- Mobile menu toggle -->
+                    <span class="bar"></span> <!-- Hamburger line 1 -->
+                    <span class="bar"></span> <!-- Hamburger line 2 -->
+                    <span class="bar"></span> <!-- Hamburger line 3 -->
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- PACKAGE DETAIL HEADER --> <!-- Hero section for package details -->
+    <section class="package-detail-header"> <!-- Header section with photo slider -->
+        <div class="header-slider-container"> <!-- Slider container -->
+            <div class="header-slider"> <!-- Slider wrapper -->
+                <div class="header-slide active"> <!-- First slide (active) -->
+                    <img src="assets/package/spiti-header1.jpg" alt="Spiti Valley" onerror="this.src='assets/images/placeholder-mountain.jpg'"> <!-- Header image 1 -->
+                    <div class="header-overlay"></div> <!-- Dark overlay for text readability -->
+                </div>
+                <div class="header-slide"> <!-- Second slide -->
+                    <img src="assets/package/spiti-header2.jpg" alt="Spiti Landscape" onerror="this.src='assets/images/placeholder-mountain.jpg'"> <!-- Header image 2 -->
+                    <div class="header-overlay"></div> <!-- Dark overlay -->
+                </div>
+                <div class="header-slide"> <!-- Third slide -->
+                    <img src="assets/package/spiti-header3.jpg" alt="Spiti Monastery" onerror="this.src='assets/images/placeholder-mountain.jpg'"> <!-- Header image 3 -->
+                    <div class="header-overlay"></div> <!-- Dark overlay -->
+                </div>
+            </div>
+            <div class="header-content"> <!-- Content overlaid on slider -->
+                <div class="container"> <!-- Container for text -->
+                    <h1 class="package-detail-title">Spiti Valley Expedition</h1> <!-- Package title -->
+                    <p class="package-detail-subtitle">8 Days / 7 Nights Journey</p> <!-- Duration -->
+                    <p class="package-detail-route">Chandigarh → Shimla → Sangla → Chitkul → Tabo → Kaza → Kalpa → Shimla → Chandigarh</p> <!-- Route -->
+                </div>
+            </div>
+            <div class="header-slider-controls"> <!-- Slider navigation buttons -->
+                <button class="header-prev" onclick="changeHeaderSlide(-1)">‹</button> <!-- Previous button -->
+                <button class="header-next" onclick="changeHeaderSlide(1)">›</button> <!-- Next button -->
+            </div>
+            <div class="header-slider-dots"> <!-- Dot indicators -->
+                <span class="header-dot active" onclick="setHeaderSlide(0)"></span> <!-- Dot 1 (active) -->
+                <span class="header-dot" onclick="setHeaderSlide(1)"></span> <!-- Dot 2 -->
+                <span class="header-dot" onclick="setHeaderSlide(2)"></span> <!-- Dot 3 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- PACKAGE DETAIL CONTENT --> <!-- Main content area -->
+    <section class="package-detail-content"> <!-- Content section -->
+        <div class="container"> <!-- Container for content -->
+            
+            <!-- ITINERARY SECTION --> <!-- Day-by-day itinerary -->
+            <div class="itinerary-section"> <!-- Itinerary container -->
+                <h2 class="section-title">Detailed Itinerary</h2> <!-- Section heading -->
+                
+                <!-- Day 1 --> <!-- First day of tour -->
+                <div class="itinerary-day"> <!-- Day card -->
+                    <div class="day-header"> <!-- Day header section -->
+                        <h3 class="day-title"><span>📍</span> Day 01</h3> <!-- Day number with icon -->
+                        <h4 class="day-subtitle">Chandigarh to Shimla</h4> <!-- Day route -->
+                    </div> <!-- End day header -->
+                    <div class="day-content"> <!-- Day content section -->
+                        <div class="day-images"> <!-- Images for this day -->
+                            <div class="day-image"><img src="assets/package/spiti-day1-1.jpg" alt="Day 1 - Shimla" onerror="this.parentElement.style.display='none'"></div> <!-- Day 1 image 1 -->
+                            <div class="day-image"><img src="assets/package/spiti-day1-2.jpg" alt="Day 1 - Mall Road" onerror="this.parentElement.style.display='none'"></div> <!-- Day 1 image 2 -->
+                        </div> <!-- End day images -->
+                        <p class="day-description">Early Afternoon arrives pickup and travel to Shimla, freshen up and transfers to Shimla by pre-reserved car, enjoy the Mall Road if time allows, and take rest. Evening free in leisure. Overnight stay at Shimla.</p> <!-- Day description -->
+                    </div> <!-- End day content -->
+                </div> <!-- End day card -->
+                
+                <!-- Day 2 --> <!-- Second day of tour -->
+                <div class="itinerary-day"> <!-- Day card -->
+                    <div class="day-header"> <!-- Day header section -->
+                        <h3 class="day-title"><span>🏔️</span> Day 02</h3> <!-- Day number with icon -->
+                        <h4 class="day-subtitle">Shimla to Sangla</h4> <!-- Day route -->
+                    </div> <!-- End day header -->
+                    <div class="day-content"> <!-- Day content section -->
+                        <div class="day-images"> <!-- Images for this day -->
+                            <div class="day-image"><img src="assets/package/spiti-day2-1.jpg" alt="Day 2 - Sangla Valley" onerror="this.parentElement.style.display='none'"></div> <!-- Day 2 image 1 -->
+                            <div class="day-image"><img src="assets/package/spiti-day2-2.jpg" alt="Day 2 - Baspa Valley" onerror="this.parentElement.style.display='none'"></div> <!-- Day 2 image 2 -->
+                        </div> <!-- End day images -->
+                        <p class="day-description">After breakfast check-out from Hotel and depart for Sangla via Karcham. Your journey from here will take you to another spectacular destination in the middle Himalayas which is also known as Baspa valley, the prettiest valley in Himachal. Arrive at Sangla & check-in to your Hotel. After a delicious dinner, sleep comfortably overnight. Transfer to hotel O/N at Hotel.</p> <!-- Day description -->
+                    </div> <!-- End day content -->
+                </div> <!-- End day card -->
+                
+                <!-- Day 3 --> <!-- Third day of tour -->
+                <div class="itinerary-day"> <!-- Day card -->
+                    <div class="day-header"> <!-- Day header section -->
+                        <h3 class="day-title"><span>🏘️</span> Day 03</h3> <!-- Day number with icon -->
+                        <h4 class="day-subtitle">Sangla to Chitkul</h4> <!-- Day route -->
+                    </div> <!-- End day header -->
+                    <div class="day-content"> <!-- Day content section -->
+                        <div class="day-images"> <!-- Images for this day -->
+                            <div class="day-image"><img src="assets/package/spiti-day3-1.jpg" alt="Day 3 - Chitkul Village" onerror="this.parentElement.style.display='none'"></div> <!-- Day 3 image 1 -->
+                            <div class="day-image"><img src="assets/package/spiti-day3-2.jpg" alt="Day 3 - Nako Lake" onerror="this.parentElement.style.display='none'"></div> <!-- Day 3 image 2 -->
+                            <div class="day-image"><img src="assets/package/spiti-day3-3.jpg" alt="Day 3 - Kalpa" onerror="this.parentElement.style.display='none'"></div> <!-- Day 3 image 3 -->
+                        </div> <!-- End day images -->
+                        <p class="day-description">After breakfast leave for an excursion to Chitkul - the last Village on old Indo-Tibetan trade route. Walk through the green orchards, by a brilliant stream. After seeing the Sangla Valley, visit Kalpa via Gue Monastery and enjoy the beautiful drive through Karcham, Reckong Peo. Visit Nako lake, Nako Village. After that overnight stay in Tabo.</p> <!-- Day description -->
+                    </div> <!-- End day content -->
+                </div> <!-- End day card -->
+                
+                <!-- Day 4 --> <!-- Fourth day of tour -->
+                <div class="itinerary-day"> <!-- Day card -->
+                    <div class="day-header"> <!-- Day header section -->
+                        <h3 class="day-title"><span>🛕</span> Day 04</h3> <!-- Day number with icon -->
+                        <h4 class="day-subtitle">Tabo to Kaza</h4> <!-- Day route -->
+                    </div> <!-- End day header -->
+                    <div class="day-content"> <!-- Day content section -->
+                        <div class="day-images"> <!-- Images for this day -->
+                            <div class="day-image"><img src="assets/package/spiti-day4-1.jpg" alt="Day 4 - Tabo Monastery" onerror="this.parentElement.style.display='none'"></div> <!-- Day 4 image 1 -->
+                            <div class="day-image"><img src="assets/package/spiti-day4-2.jpg" alt="Day 4 - Dhankar Monastery" onerror="this.parentElement.style.display='none'"></div> <!-- Day 4 image 2 -->
+                            <div class="day-image"><img src="assets/package/spiti-day4-3.jpg" alt="Day 4 - Kaza" onerror="this.parentElement.style.display='none'"></div> <!-- Day 4 image 3 -->
+                        </div> <!-- End day images -->
+                        <p class="day-description">Today after breakfast check out from hotel and visit one of the most famous Buddhist monasteries, regarded next to the Tholong Gompa in Tibet. It is also known as the 'Ajanta of Himalayas'. On the way visit Dhankar monastery beautifully perched on a hill top overlooking Spiti river. We will later drive to Kaza, the district headquarter of Spiti valley. Overnight at hotel.
+
+<strong>Sightseeing:</strong>
+• Tabo Monastery
+• Dhankar Village
+• Dhankar Monastery</p> <!-- Day description with highlights -->
+                    </div> <!-- End day content -->
+                </div> <!-- End day card -->
+                
+                <!-- Day 5 --> <!-- Fifth day of tour -->
+                <div class="itinerary-day"> <!-- Day card -->
+                    <div class="day-header"> <!-- Day header section -->
+                        <h3 class="day-title"><span>🏞️</span> Day 05</h3> <!-- Day number with icon -->
+                        <h4 class="day-subtitle">Kaza Local Sightseeing</h4> <!-- Day route -->
+                    </div> <!-- End day header -->
+                    <div class="day-content"> <!-- Day content section -->
+                        <div class="day-images"> <!-- Images for this day -->
+                            <div class="day-image"><img src="assets/package/spiti-day5-1.jpg" alt="Day 5 - Key Monastery" onerror="this.parentElement.style.display='none'"></div> <!-- Day 5 image 1 -->
+                            <div class="day-image"><img src="assets/package/spiti-day5-2.jpg" alt="Day 5 - Kibber Village" onerror="this.parentElement.style.display='none'"></div> <!-- Day 5 image 2 -->
+                            <div class="day-image"><img src="assets/package/spiti-day5-3.jpg" alt="Day 5 - Langza" onerror="this.parentElement.style.display='none'"></div> <!-- Day 5 image 3 -->
+                        </div> <!-- End day images -->
+                        <p class="day-description">After Breakfast we shall leave for Kibber Monastery and Kibber village and after full day sightseeing Kaza Sightseeing. Then back to Hotel O/N At Hotel.
+
+<strong>Sightseeing:</strong>
+• CHICHAM & Kibber Village
+• Komic, Hikkim & Langza
+• Key Monastery</p> <!-- Day description with highlights -->
+                    </div> <!-- End day content -->
+                </div> <!-- End day card -->
+                
+                <!-- Day 6 --> <!-- Sixth day of tour -->
+                <div class="itinerary-day"> <!-- Day card -->
+                    <div class="day-header"> <!-- Day header section -->
+                        <h3 class="day-title"><span>🏡</span> Day 06</h3> <!-- Day number with icon -->
+                        <h4 class="day-subtitle">Kaza to Kalpa</h4> <!-- Day route -->
+                    </div> <!-- End day header -->
+                    <div class="day-content"> <!-- Day content section -->
+                        <div class="day-images"> <!-- Images for this day -->
+                            <div class="day-image"><img src="assets/package/spiti-day6-1.jpg" alt="Day 6 - Kalpa" onerror="this.parentElement.style.display='none'"></div> <!-- Day 6 image 1 -->
+                            <div class="day-image"><img src="assets/package/spiti-day6-2.jpg" alt="Day 6 - Kalpa View" onerror="this.parentElement.style.display='none'"></div> <!-- Day 6 image 2 -->
+                        </div> <!-- End day images -->
+                        <p class="day-description">Early in the morning after breakfast check out from hotel & drive back to Kalpa. After reaching Kalpa check into the homestay. Stay at Kalpa.</p> <!-- Day description -->
+                    </div> <!-- End day content -->
+                </div> <!-- End day card -->
+                
+                <!-- Day 7 --> <!-- Seventh day of tour -->
+                <div class="itinerary-day"> <!-- Day card -->
+                    <div class="day-header"> <!-- Day header section -->
+                        <h3 class="day-title"><span>🌄</span> Day 07</h3> <!-- Day number with icon -->
+                        <h4 class="day-subtitle">Kalpa Sightseeing to Shimla</h4> <!-- Day route -->
+                    </div> <!-- End day header -->
+                    <div class="day-content"> <!-- Day content section -->
+                        <div class="day-images"> <!-- Images for this day -->
+                            <div class="day-image"><img src="assets/package/spiti-day7-1.jpg" alt="Day 7 - Kalpa Sightseeing" onerror="this.parentElement.style.display='none'"></div> <!-- Day 7 image 1 -->
+                            <div class="day-image"><img src="assets/package/spiti-day7-2.jpg" alt="Day 7 - Return to Shimla" onerror="this.parentElement.style.display='none'"></div> <!-- Day 7 image 2 -->
+                        </div> <!-- End day images -->
+                        <p class="day-description">Today morning after breakfast check out from homestay, visit Kalpa sightseeing. After that drive to Shimla. Check into the hotel.</p> <!-- Day description -->
+                    </div> <!-- End day content -->
+                </div> <!-- End day card -->
+                
+                <!-- Day 8 --> <!-- Eighth day of tour -->
+                <div class="itinerary-day"> <!-- Day card -->
+                    <div class="day-header"> <!-- Day header section -->
+                        <h3 class="day-title"><span>🏁</span> Day 08</h3> <!-- Day number with icon -->
+                        <h4 class="day-subtitle">Shimla to Chandigarh</h4> <!-- Day route -->
+                    </div> <!-- End day header -->
+                    <div class="day-content"> <!-- Day content section -->
+                        <div class="day-images"> <!-- Images for this day -->
+                            <div class="day-image"><img src="assets/package/spiti-day8-1.jpg" alt="Day 8 - Departure" onerror="this.parentElement.style.display='none'"></div> <!-- Day 8 image 1 -->
+                        </div> <!-- End day images -->
+                        <p class="day-description">Today morning 11 AM after having your breakfast, check out from hotel and drive to Chandigarh.</p> <!-- Day description -->
+                    </div> <!-- End day content -->
+                </div> <!-- End day card -->
+            </div>
+            
+            <!-- GALLERY SECTION --> <!-- Photos and videos section -->
+            <div class="gallery-section"> <!-- Gallery container -->
+                <h2 class="section-title">Package Gallery</h2> <!-- Section heading -->
+                <p class="section-subtitle">Explore stunning visuals from this incredible journey</p> <!-- Section subtitle -->
+                
+                <div class="media-grid"> <!-- Grid for media items -->
+                    <!-- Images will be loaded from assets/package/ folder -->
+                    <div class="media-item"><img src="assets/package/spiti1.jpg" alt="Spiti Valley" onerror="this.parentElement.style.display='none'"></div> <!-- Image 1 -->
+                    <div class="media-item"><img src="assets/package/spiti2.jpg" alt="Chitkul Village" onerror="this.parentElement.style.display='none'"></div> <!-- Image 2 -->
+                    <div class="media-item"><img src="assets/package/spiti3.jpg" alt="Tabo Monastery" onerror="this.parentElement.style.display='none'"></div> <!-- Image 3 -->
+                    <div class="media-item"><img src="assets/package/spiti4.jpg" alt="Kaza" onerror="this.parentElement.style.display='none'"></div> <!-- Image 4 -->
+                    <div class="media-item"><img src="assets/package/spiti5.jpg" alt="Key Monastery" onerror="this.parentElement.style.display='none'"></div> <!-- Image 5 -->
+                    <div class="media-item"><img src="assets/package/spiti6.jpg" alt="Sangla Valley" onerror="this.parentElement.style.display='none'"></div> <!-- Image 6 -->
+                    
+                    <!-- Videos will be loaded from assets/package/ folder -->
+                    <div class="media-item"><video controls><source src="assets/package/spiti1.mp4" type="video/mp4">Your browser does not support the video tag.</video></div> <!-- Video 1 -->
+                    <div class="media-item"><video controls><source src="assets/package/spiti2.mp4" type="video/mp4">Your browser does not support the video tag.</video></div> <!-- Video 2 -->
+                </div>
+            </div>
+            
+            <!-- CTA SECTION --> <!-- Call to action section -->
+            <div class="cta-section"> <!-- CTA container -->
+                <h2 class="cta-title">Ready to Begin Your Spiti Adventure?</h2> <!-- CTA heading -->
+                <p style="font-size: 1.1rem; color: var(--gray); margin-bottom: var(--spacing-md);">Contact us now to book this amazing package or customize it according to your preferences!</p> <!-- CTA description -->
+                
+                <div class="cta-buttons"> <!-- Buttons container -->
+                    <a href="tel:+919805440345" class="cta-btn cta-btn-primary">📞 Call Now</a> <!-- Call button -->
+                    <a href="https://wa.me/919805440345" target="_blank" class="cta-btn cta-btn-secondary">💬 WhatsApp Us</a> <!-- WhatsApp button -->
+                    <a href="index.html#contact" class="cta-btn cta-btn-primary">✉️ Get Quote</a> <!-- Contact form button -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER --> <!-- Footer section -->
+    <footer class="footer"> <!-- Footer element -->
+        <div class="container"> <!-- Container for footer content -->
+            <div class="footer-content"> <!-- Footer content grid -->
+                <div class="footer-section"> <!-- Footer section 1 -->
+                    <h4>MountMagic</h4> <!-- Company name -->
+                    <p>Your trusted partner for mountain adventures and unforgettable travel experiences.</p> <!-- Company description -->
+                </div>
+                <div class="footer-section"> <!-- Footer section 2 -->
+                    <h4>Quick Links</h4> <!-- Section heading -->
+                    <ul class="footer-links"> <!-- Links list -->
+                        <li><a href="index.html#home">Home</a></li> <!-- Home link -->
+                        <li><a href="index.html#gallery">Gallery</a></li> <!-- Gallery link -->
+                        <li><a href="index.html#packages">Packages</a></li> <!-- Packages link -->
+                        <li><a href="index.html#reviews">Reviews</a></li> <!-- Reviews link -->
+                    </ul>
+                </div>
+                <div class="footer-section"> <!-- Footer section 3 -->
+                    <h4>Contact</h4> <!-- Section heading -->
+                    <p>Phone: +91 9805440345</p> <!-- Phone number -->
+                    <p>Email: mountmagic24@gmail.com</p> <!-- Email -->
+                    <p>Instagram: @mountmagic24</p> <!-- Instagram -->
+                    <p>Shimla, Himachal Pradesh</p> <!-- Location -->
+                </div>
+            </div>
+            <div class="footer-bottom"> <!-- Footer bottom section -->
+                <p>&copy; 2026 MountMagic. All rights reserved. | Designed for mountain lovers ❤️</p> <!-- Copyright text -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript --> <!-- Link to JavaScript file -->
+    <script src="js/main.js"></script> <!-- Main JavaScript file -->    
+    <script>
+        // Header slider functionality for package detail page
+        let headerSlideIndex = 0;
+        
+        function changeHeaderSlide(n) {
+            showHeaderSlide(headerSlideIndex += n);
+        }
+        
+        function setHeaderSlide(n) {
+            showHeaderSlide(headerSlideIndex = n);
+        }
+        
+        function showHeaderSlide(n) {
+            const slides = document.querySelectorAll('.header-slide');
+            const dots = document.querySelectorAll('.header-dot');
+            
+            if (n >= slides.length) { headerSlideIndex = 0; }
+            if (n < 0) { headerSlideIndex = slides.length - 1; }
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[headerSlideIndex].classList.add('active');
+            dots[headerSlideIndex].classList.add('active');
+        }
+        
+        // Auto-advance slider every 5 seconds
+        setInterval(() => {
+            changeHeaderSlide(1);
+        }, 5000);
+    </script></body>
+</html>

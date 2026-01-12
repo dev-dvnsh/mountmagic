@@ -1,0 +1,633 @@
+<!DOCTYPE html> <!-- Declares this as an HTML5 document -->
+<html lang="en"> <!-- Root element, sets language to English -->
+<head> <!-- Contains metadata and links to external resources -->
+    <meta charset="UTF-8"> <!-- Sets character encoding to UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes website responsive -->
+    <meta name="description" content="Manali-Shimla-Delhi Tour - 6 Days adventure with MountMagic"> <!-- SEO description -->
+    <title>Manali-Shimla-Delhi Tour - MountMagic</title> <!-- Page title -->
+    
+    <!-- Google Fonts --> <!-- Importing fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Package Detail Page Styles -->
+    <style>
+        /* Package detail page specific styles */
+        .package-detail-header {
+            position: relative;
+            margin-top: 70px;
+            overflow: hidden;
+        }
+        
+        .header-slider-container {
+            position: relative;
+            height: 65vh;
+            min-height: 450px;
+        }
+        
+        .header-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .header-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        
+        .header-slide.active {
+            opacity: 1;
+        }
+        
+        .header-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.75);
+        }
+        
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(44,95,125,0.7) 100%);
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            color: var(--white);
+            text-align: center;
+            z-index: 2;
+            padding: 0 20px;
+        }
+        
+        .package-detail-title {
+            font-family: var(--font-secondary);
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 3px 8px rgba(0,0,0,0.4);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .package-detail-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            text-shadow: 1px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 500;
+        }
+        
+        .package-detail-route {
+            font-size: 1.05rem;
+            opacity: 0.92;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .header-slider-controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+            z-index: 3;
+        }
+        
+        .header-prev,
+        .header-next {
+            background: rgba(255,255,255,0.25);
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .header-prev:hover,
+        .header-next:hover {
+            background: rgba(255,255,255,0.4);
+            transform: scale(1.08);
+        }
+        
+        .header-slider-dots {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 3;
+        }
+        
+        .header-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .header-dot.active {
+            background: white;
+            width: 35px;
+            border-radius: 6px;
+        }
+        
+        .package-detail-content {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--off-white);
+        }
+        
+        .itinerary-section {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .itinerary-day {
+            background-color: var(--white);
+            border-radius: 14px;
+            padding: 0;
+            margin-bottom: 28px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 4px solid var(--deep-blue);
+        }
+        
+        .itinerary-day:nth-child(even) {
+            border-left-color: var(--sky-blue);
+        }
+        
+        .itinerary-day:hover {
+            transform: translateY(-6px) translateX(3px);
+            box-shadow: 0 12px 35px rgba(44,95,125,0.18);
+        }
+        
+        .day-header {
+            background: linear-gradient(125deg, var(--deep-blue) 0%, var(--sky-blue) 95%);
+            color: var(--white);
+            padding: 22px 24px;
+            position: relative;
+        }
+        
+        .day-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, rgba(135,206,235,0.6) 0%, transparent 100%);
+        }
+        
+        .day-title {
+            font-family: var(--font-secondary);
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-xs);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .day-subtitle {
+            color: var(--white);
+            font-weight: 500;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        
+        .day-content {
+            padding: var(--spacing-md);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+        }
+        
+        .day-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .day-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            aspect-ratio: 4/3;
+            background-color: var(--light-gray);
+        }
+        
+        .day-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-fast);
+        }
+        
+        .day-image:hover img {
+            transform: scale(1.1);
+        }
+        
+        .day-description {
+            color: var(--dark-gray);
+            line-height: 1.8;
+            white-space: pre-line;
+            font-size: 1.05rem;
+        }
+        
+        .gallery-section {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .media-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            background-color: #000;
+            aspect-ratio: 16/9;
+        }
+        
+        .media-item img,
+        .media-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cta-section {
+            background-color: var(--off-white);
+            padding: var(--spacing-xl);
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .cta-title {
+            font-family: var(--font-secondary);
+            font-size: 2rem;
+            color: var(--deep-blue);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--spacing-md);
+        }
+        
+        .cta-btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-btn-primary {
+            background-color: var(--deep-blue);
+            color: var(--white);
+        }
+        
+        .cta-btn-primary:hover {
+            background-color: var(--primary-green);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .cta-btn-secondary {
+            background-color: #25d366;
+            color: var(--white);
+        }
+        
+        .cta-btn-secondary:hover {
+            background-color: #20ba5a;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        @media (max-width: 768px) {
+            .package-detail-title {
+                font-size: 2rem;
+            }
+            
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .cta-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAVBAR -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <img src="assets/logo.png" alt="MountMagic Logo" class="logo">
+                    </a>
+                    <a href="index.html" style="text-decoration: none; color: inherit;">
+                        <span class="brand-name">MountMagic</span>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="index.html#gallery" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="index.html#packages" class="nav-link">Packages</a></li>
+                    <li class="nav-item"><a href="index.html#reviews" class="nav-link">Reviews</a></li>
+                    <li class="nav-item"><a href="index.html#about" class="nav-link">About Us</a></li>
+                    <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- PACKAGE DETAIL HEADER -->
+    <section class="package-detail-header">
+        <div class="header-slider-container">
+            <div class="header-slider">
+                <div class="header-slide active">
+                    <img src="assets/package/manali-header1.jpg" alt="Manali Shimla" onerror="this.src='assets/images/placeholder-mountain.jpg'">
+                    <div class="header-overlay"></div>
+                </div>
+                <div class="header-slide">
+                    <img src="assets/package/manali-header2.jpg" alt="Himachal Beauty" onerror="this.src='assets/images/placeholder-mountain.jpg'">
+                    <div class="header-overlay"></div>
+                </div>
+                <div class="header-slide">
+                    <img src="assets/package/manali-header3.jpg" alt="Delhi Monuments" onerror="this.src='assets/images/placeholder-mountain.jpg'">
+                    <div class="header-overlay"></div>
+                </div>
+            </div>
+            <div class="header-content">
+                <div class="container">
+                    <h1 class="package-detail-title">Manali-Shimla-Delhi Tour</h1>
+                    <p class="package-detail-subtitle">6 Days / 5 Nights Adventure</p>
+                    <p class="package-detail-route">Phillaur → Manali → Shimla → Delhi</p>
+                </div>
+            </div>
+            <div class="header-slider-controls">
+                <button class="header-prev" onclick="changeHeaderSlide(-1)">‹</button>
+                <button class="header-next" onclick="changeHeaderSlide(1)">›</button>
+            </div>
+            <div class="header-slider-dots">
+                <span class="header-dot active" onclick="setHeaderSlide(0)"></span>
+                <span class="header-dot" onclick="setHeaderSlide(1)"></span>
+                <span class="header-dot" onclick="setHeaderSlide(2)"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PACKAGE DETAIL CONTENT -->
+    <section class="package-detail-content">
+        <div class="container">
+            
+            <!-- ITINERARY SECTION -->
+            <div class="itinerary-section">
+                <h2 class="section-title">Detailed Itinerary</h2>
+                
+                <!-- Day 1 -->
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <h3 class="day-title"><span>🚗</span> Day 01</h3>
+                        <h4 class="day-subtitle">Arrival at Phillaur to Manali - Overnight Journey</h4>
+                    </div>
+                    <div class="day-content">
+                        <div class="day-images">
+                            <div class="day-image"><img src="assets/package/manali-day1-1.jpg" alt="Day 1 - Journey to Manali" onerror="this.parentElement.style.display='none'"></div>
+                            <div class="day-image"><img src="assets/package/manali-day1-2.jpg" alt="Day 1 - Manali View" onerror="this.parentElement.style.display='none'"></div>
+                        </div>
+                        <p class="day-description">Once our representative reaches Phillaur, he offers an assisted transfer to your first destination Manali, by road. Manali is almost 302 km away from Jalandhar and it will take 6 to 7 hours to reach. Overnight journey to Manali.</p>
+                    </div>
+                </div>
+                
+                <!-- Day 2 -->
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <h3 class="day-title"><span>⛷️</span> Day 02</h3>
+                        <h4 class="day-subtitle">Arrival at Manali - Solang Valley || Rohtang Pass || Sissu Village || Atal Tunnel</h4>
+                    </div>
+                    <div class="day-content">
+                        <div class="day-images">
+                            <div class="day-image"><img src="assets/package/manali-day2-1.jpg" alt="Day 2 - Solang Valley" onerror="this.parentElement.style.display='none'"></div>
+                            <div class="day-image"><img src="assets/package/manali-day2-2.jpg" alt="Day 2 - Rohtang Pass" onerror="this.parentElement.style.display='none'"></div>
+                            <div class="day-image"><img src="assets/package/manali-day2-3.jpg" alt="Day 2 - Atal Tunnel" onerror="this.parentElement.style.display='none'"></div>
+                        </div>
+                        <p class="day-description">The day is scheduled for enjoying the sights and experiences at Solang Valley and Rohtang Pass. Around 14 km from the Manali city, Beas Kund and Solang Village, lies the Solang Valley, renowned for its scenic beauty and known for hosting finest adventure activities like Skiing, Trekking, Paragliding, Skating, Zorbing, Parachuting. Then you will explore the Rohtang Pass, the highest mountain pass. Enjoy the bustling tourist activity, taste the local renditions, enjoy the cool breeze and more. Visit Sissu village, Koksar Village and Atal Tunnel. Dinner and stay overnight at the hotel.</p>
+                    </div>
+                </div>
+                
+                <!-- Day 3 -->
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <h3 class="day-title"><span>🏔️</span> Day 03</h3>
+                        <h4 class="day-subtitle">Manali Transfer to Shimla via Kullu</h4>
+                    </div>
+                    <div class="day-content">
+                        <div class="day-images">
+                            <div class="day-image"><img src="assets/package/manali-day3-1.jpg" alt="Day 3 - Kullu Valley" onerror="this.parentElement.style.display='none'"></div>
+                            <div class="day-image"><img src="assets/package/manali-day3-2.jpg" alt="Day 3 - Vaishno Devi Temple" onerror="this.parentElement.style.display='none'"></div>
+                            <div class="day-image"><img src="assets/package/manali-day3-3.jpg" alt="Day 3 - Shimla" onerror="this.parentElement.style.display='none'"></div>
+                        </div>
+                        <p class="day-description">Today after breakfast, check out from the hotel, as it's time to say goodbye to Manali. Start your journey towards Shimla. Shimla is almost 250 km away from Manali and it will take 5 to 6 hours. On the way you will visit places like Sundernagar Lake, Pandoh Dam, Aut Tunnel and Kullu Valley. On reaching Kullu, visit Mata Vaishno Devi Temple. Continue your journey towards Shimla. As you reach, check in directly at your hotel, take a welcome tea/coffee. Settle into the room. Enjoy your delicious dinner and comfort stay at the hotel.</p>
+                    </div>
+                </div>
+                
+                <!-- Day 4 -->
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <h3 class="day-title"><span>🏞️</span> Day 04</h3>
+                        <h4 class="day-subtitle">Shimla Sightseeing and Half Day Tour to Kufri</h4>
+                    </div>
+                    <div class="day-content">
+                        <div class="day-images">
+                            <div class="day-image"><img src="assets/package/manali-day4-1.jpg" alt="Day 4 - Kufri" onerror="this.parentElement.style.display='none'"></div>
+                            <div class="day-image"><img src="assets/package/manali-day4-2.jpg" alt="Day 4 - Mall Road" onerror="this.parentElement.style.display='none'"></div>
+                            <div class="day-image"><img src="assets/package/manali-day4-3.jpg" alt="Day 4 - Jakhoo Temple" onerror="this.parentElement.style.display='none'"></div>
+                        </div>
+                        <p class="day-description">Morning get fresh up and then have breakfast with the view of mountains. After having your breakfast gear up for the day sightseeing, as you are going to explore Kufri - a perfect day out. Located 16 km from Shimla, Kufri is bestowed with slopes, which makes it a hub for adventure lovers. A great place to unwind, Kufri offers panoramic view of the Himalayas. This tiny tinsel town features various places of interest like Himalayan National Park, Chini Bungalow, Kufri Fun World, etc. The highest peak in Kufri - Mahasu Peak is yet another hotspot for tourists. You can do activities like Yak Riding, Pony Ride. Afternoon get transfer to Shimla, visit Mall Road, The Ridge, Jakhoo Temple, Christ Church. Enjoy evening at Mall Road, have shopping and dinner. Overnight stay at Hotel.</p>
+                    </div>
+                </div>
+                
+                <!-- Day 5 -->
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <h3 class="day-title"><span>🚌</span> Day 05</h3>
+                        <h4 class="day-subtitle">Shimla to Delhi</h4>
+                    </div>
+                    <div class="day-content">
+                        <div class="day-images">
+                            <div class="day-image"><img src="assets/package/manali-day5-1.jpg" alt="Day 5 - Journey to Delhi" onerror="this.parentElement.style.display='none'"></div>
+                            <div class="day-image"><img src="assets/package/manali-day5-2.jpg" alt="Day 5 - Delhi Arrival" onerror="this.parentElement.style.display='none'"></div>
+                        </div>
+                        <p class="day-description">After the breakfast at the hotel check out from the hotel and start your drive to Delhi. Delhi is around 370 km from Shimla and will take 7 to 8 hours journey. As you reach check-in to your hotel, dinner and overnight stay at hotel.</p>
+                    </div>
+                </div>
+                
+                <!-- Day 6 -->
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <h3 class="day-title"><span>🕍</span> Day 06</h3>
+                        <h4 class="day-subtitle">Delhi Local Sightseeing</h4>
+                    </div>
+                    <div class="day-content">
+                        <div class="day-images">
+                            <div class="day-image"><img src="assets/package/manali-day6-1.jpg" alt="Day 6 - India Gate" onerror="this.parentElement.style.display='none'"></div>
+                            <div class="day-image"><img src="assets/package/manali-day6-2.jpg" alt="Day 6 - Red Fort" onerror="this.parentElement.style.display='none'"></div>
+                            <div class="day-image"><img src="assets/package/manali-day6-3.jpg" alt="Day 6 - Qutub Minar" onerror="this.parentElement.style.display='none'"></div>
+                        </div>
+                        <p class="day-description">After the breakfast at the hotel check out from the hotel and visit Delhi. You will be leaving for Delhi Sightseeing. Visit the famous spots such as Parliament House, India Gate, Lotus Temple, Red Fort, Raj Ghat, Qutub Minar, Rashtrapati Bhavan, Dr. B.R. Ambedkar National Memorial. Go for shopping, take some casual strolls, and relish some local street foods. After that start your journey towards Delhi Railway Station to start your journey way back to home.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- GALLERY SECTION -->
+            <div class="gallery-section">
+                <h2 class="section-title">Package Gallery</h2>
+                <p class="section-subtitle">Explore stunning visuals from this incredible journey</p>
+                
+                <div class="media-grid">
+                    <!-- Images from assets/package/ folder -->
+                    <div class="media-item"><img src="assets/package/manali1.jpg" alt="Manali" onerror="this.parentElement.style.display='none'"></div>
+                    <div class="media-item"><img src="assets/package/manali2.jpg" alt="Rohtang Pass" onerror="this.parentElement.style.display='none'"></div>
+                    <div class="media-item"><img src="assets/package/manali3.jpg" alt="Solang Valley" onerror="this.parentElement.style.display='none'"></div>
+                    <div class="media-item"><img src="assets/package/manali4.jpg" alt="Shimla" onerror="this.parentElement.style.display='none'"></div>
+                    <div class="media-item"><img src="assets/package/manali5.jpg" alt="Kufri" onerror="this.parentElement.style.display='none'"></div>
+                    <div class="media-item"><img src="assets/package/manali6.jpg" alt="Delhi" onerror="this.parentElement.style.display='none'"></div>
+                    
+                    <!-- Videos from assets/package/ folder -->
+                    <div class="media-item"><video controls><source src="assets/package/manali1.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>
+                    <div class="media-item"><video controls><source src="assets/package/manali2.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>
+                </div>
+            </div>
+            
+            <!-- CTA SECTION -->
+            <div class="cta-section">
+                <h2 class="cta-title">Ready to Explore Manali, Shimla & Delhi?</h2>
+                <p style="font-size: 1.1rem; color: var(--gray); margin-bottom: var(--spacing-md);">Contact us now to book this amazing package or customize it according to your preferences!</p>
+                
+                <div class="cta-buttons">
+                    <a href="tel:+919805440345" class="cta-btn cta-btn-primary">📞 Call Now</a>
+                    <a href="https://wa.me/919805440345" target="_blank" class="cta-btn cta-btn-secondary">💬 WhatsApp Us</a>
+                    <a href="index.html#contact" class="cta-btn cta-btn-primary">✉️ Get Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MountMagic</h4>
+                    <p>Your trusted partner for mountain adventures and unforgettable travel experiences.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#gallery">Gallery</a></li>
+                        <li><a href="index.html#packages">Packages</a></li>
+                        <li><a href="index.html#reviews">Reviews</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Phone: +91 9805440345</p>
+                    <p>Email: mountmagic24@gmail.com</p>
+                    <p>Instagram: @mountmagic24</p>
+                    <p>Shimla, Himachal Pradesh</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 MountMagic. All rights reserved. | Designed for mountain lovers ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    
+    <script>
+        // Header slider functionality for package detail page
+        let headerSlideIndex = 0;
+        
+        function changeHeaderSlide(n) {
+            showHeaderSlide(headerSlideIndex += n);
+        }
+        
+        function setHeaderSlide(n) {
+            showHeaderSlide(headerSlideIndex = n);
+        }
+        
+        function showHeaderSlide(n) {
+            const slides = document.querySelectorAll('.header-slide');
+            const dots = document.querySelectorAll('.header-dot');
+            
+            if (n >= slides.length) { headerSlideIndex = 0; }
+            if (n < 0) { headerSlideIndex = slides.length - 1; }
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[headerSlideIndex].classList.add('active');
+            dots[headerSlideIndex].classList.add('active');
+        }
+        
+        // Auto-advance slider every 5 seconds
+        setInterval(() => {
+            changeHeaderSlide(1);
+        }, 5000);
+    </script>
+</body>
+</html>
