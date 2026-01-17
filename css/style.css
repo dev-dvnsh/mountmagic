@@ -685,7 +685,7 @@ button { /* Button reset styling */
     background-color: var(--secondary-green);
     transform: translateY(-1px);
 }
-}
+
 
 .view-details-btn:hover {
     background-color: var(--primary-green);
